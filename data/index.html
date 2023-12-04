@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    @See 
+    * https://www.highcharts.com/demo
+    * https://www.highcharts.com/demo/highcharts/sankey-diagram
+    * https://jsfiddle.net/0jxukbcm
+    * https://jsfiddle.net/0jxukbcm/5/
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teemo is great</title>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/sankey.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <!-- 
+    With CSS you can style things.
+  --> 
+  <style type="text/css">
+    h2 {
+      margin: 0 0 20px 0;
+    }
+    p {
+      color: red;
+    }
+    .highcharts-figure {
+      margin: auto auto;
+      max-width: 1200px;
+    }
+  </style>
+</head>
+<body>
+  <figure class="highcharts-figure">
+    <h2>Sankey demo</h2>
+    <!-- 
+      This is the chart container 
+    --> 
+    <div id="container"></div>
+    <p class="highcharts-description">
+      Sankey awesome charts are used to visualize data flow and volume
+      between nodes. The wider lines indicate larger volumes.
+    </p>
+  </figure>
+
+  <script type="text/javascript">
+    /*
+      Highcharts is used to create the chart.
+      For the settings refer to Highcharts API
+    
+      @See
+      * https://api.highcharts.com/highcharts/
+    */
+    Highcharts.chart('container', {
+      title: {
+        text: 'Title of the graph'
+      },
+      subtitle: {
+        text: 'Subtitle'
+      },
+      accessibility: {
+        point: {
+          valueDescriptionFormat: '{index}. {point.from} to {point.to}, {point.weight}.'
+        }
+      },
+      tooltip: {
+        headerFormat: null,
+        pointFormat: '{point.fromNode.name} \u2192 {point.toNode.name}: {point.weight:.2f} quads',
+        nodeFormat: '{point.name}: {point.sum:.2f} quads'
+      },
+      // The series defines the data
+      series: [{
+        keys: ['from', 'to', 'weight'],
+        nodes: [{
+          id: '0 Democratic Republic of the Congo',
+          color: '#ffa500'
+        },{
+          id: '1 China',
+          column: 1,
+          color: '#ffa500'
+        },{
+          id: '1 Morocco',
+          column: 1,
+          color: '#ffa500',
+          offset: 50
+        },{
+          id: '1 Democratic Republic of the Congo',
+          column: 1,
+          color: '#ffa500',
+          offset: 50
+        },{
+          id: '2 China',
+          column: 2,
+          color: '#ffa500'
+        }],
+        data: [
+          ['0 Democratic Republic of the Congo', '1 China', 140121713],
+          ['0 Democratic Republic of the Congo', '2 Morocco', 26506016],
+          ['1 Democratic Republic of the Congo', '2 China', 5741004434]
+        ],
+        type: 'sankey',
+        name: 'Sankey demo series'
+      }]
+    });
+  </script>
+</body>
+</html>

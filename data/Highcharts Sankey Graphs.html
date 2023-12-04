@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head> <!-- metadata for the document -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Critical minerals Sankey graphs</title>
+
+
+<!-- equivalent of import in python (modules) -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/sankey.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<style type="text/css">
+@import url('https://fonts.googleapis.com/css?family=Roboto:200,400,600.css');
+</style>
+</head>
+<body> <!-- what users see --> 
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description">
+       
+        </p>
+    </figure>
+
+<script type="text/javascript">
+Highcharts.chart('container', {
+
+  title: {
+    text: 'Cobalt bilateral trade flows along the EV value chain (US$ Trade value)',
+    align: 'left'
+  },
+  subtitle: {
+    text: 'Source: UNCTAD calculations based on <a href=\'https://comtradeplus.un.org/\'> Comtrade data</a>',
+    align: 'left'
+  },
+  accessibility: {
+    point: {
+      valueDescriptionFormat: '{index}. {point.from} to {point.to}, {point.weight}.'
+    }
+  },
+  tooltip: {
+    headerFormat: null,
+    pointFormat: '{point.fromNode.name} \u2192 {point.toNode.name}: {point.weight:.2f} US$',
+    nodeFormat: '{point.name}: {point.sum:.0f} US$'
+  },
+
+  plotOptions: {
+sankey: {
+  curveFactor: 0.5,
+  nodePadding: 20,
+  minLinkWidth: 1,
+  dataLabels: {
+    align: 'left',
+    x: 20,
+    style: {
+      fontSize: '16px',
+      textOutline: '0',
+      fontFamily: 'Roboto',
+      color: 'rgba(0, 0, 0, 0.5)',
+      fontWeight: 400
+    },
+    allowOverlap: true
+  }
+}
+  },
+
+chart: {
+height: 600
+},
+
+//Try formatter for data labels. you may be able to display country names associated with a unique id for the different nodes (and get rid of node x in the graph)
+
+  series: [{
+    keys: ['from', 'to', 'weight'],
+
+    nodes: [{
+        id: 'Node 0: Democratic Republic of the Congo',
+        color: '#009edb',
+        name:'Democratic Republic of the Congo',
+        offset: 50
+      },
+      {
+        id: 'Node 0: Austria',
+        color: '#009edb',
+        name:'Austria',
+        offset: 50
+      },
+      {
+        id: 'Node 0: Netherlands',
+        color: '#009edb',
+        name:'Netherlands',
+        offset: 50
+      },
+      {
+        id: 'Node 1: China',
+        column: 1,
+        color: '#009edb',
+        name:'China',
+        offset: 50
+      },
+      {
+        id: 'Node 1: Morocco',
+        column: 1,
+        color: '#009edb',
+        name:'Morocco',
+        offset: 50
+      },
+      {
+        id: 'Node 1: Zambia',
+        column: 1,
+        color: '#009edb',
+        name:'Zambia',
+        offset: 50
+      },
+      {
+        id: 'Node 1: Finland',
+        column: 1,
+        color: '#009edb',
+        name:'Finland',
+        offset: 50
+      },
+      {
+        id: 'Node 1: Netherlands',
+        column: 1,
+        color: '#009edb',
+        name:'Netherlands',
+        offset: 50
+      },
+      {
+        id: 'Node 1: Belgium',
+        column: 1,
+        color: '#009edb',
+        name:'Belgium',
+        offset: 50
+      },
+      {
+        id: 'Node 1: Italy',
+        column: 1,
+        color: '#009edb',
+        name:'Italy',
+        offset: 50
+      },
+      {
+        id: 'Node 1: Oman',
+        column: 1,
+        color: '#009edb',
+        name:'Oman',
+        offset: 50
+      },
+      {
+        id: 'Node 1: Democratic Republic of the Congo',
+        column: 1,
+        color: '#009edb',
+        name:'Democratic Republic of the Congo',
+        offset: 50
+      },
+      {
+        id: 'Node 2: China',
+        column: 2,
+        color: '#009edb',
+        name:'China',
+        offset: 50   
+      },
+      {
+        id: 'Node 2: Namibia',
+        column: 2,
+        color: '#009edb',
+        name:'Namibia',
+        offset: 50   
+      },
+      {
+        id: 'Node 2: Rep. of Korea',
+        column: 2,
+        color: '#009edb',
+        name:'Rep. of Korea',
+        offset: 50   
+      },
+      {
+        id: 'Node 2: Japan',
+        column: 2,
+        color: '#009edb',
+        name:'Japan',
+        offset: 50   
+      },
+      {
+        id: 'Node 2: Spain',
+        column: 2,
+        color: '#009edb',
+        name:'Spain',
+        offset: 50   
+      },
+      {
+        id: 'Node 2: Belgium',
+        column: 2,
+        color: '#009edb',
+        name:'Belgium',
+        offset: 50   
+      },
+      {
+        id: 'Node 2: United States',
+        column: 2,
+        color: '#009edb',
+        name:'United States',
+        offset: 50   
+      },
+      {
+        id: 'Node 3: Rep. of Korea',
+        column: 3,
+        color: '#009edb',
+        name:'Rep. of Korea',
+        offset: 50   
+      },
+      {
+        id: 'Node 3: Japan',
+        column: 3,
+        color: '#009edb',
+        name:'Japan',
+        offset: 50   
+      },
+      {
+        id: 'Node 3: Poland',
+        column: 3,
+        color: '#009edb',
+        name:'Poland',
+        offset: 50   
+      },
+      {
+        id: 'Node 3: China',
+        column: 3,
+        color: '#009edb',
+        name:'China',
+        offset: 50   
+      },
+      {
+      id: 'Node 4: China',
+        column: 4,
+        color: '#009edb',
+        name:'China',
+        offset: 50   
+      },
+      {
+        id: 'Node 4: United States',
+        column: 4,
+        color: '#009edb',
+        name:'United States',
+        offset: 50   
+      },
+      {
+        id: 'Node 4: Germany',
+        column: 4,
+        color: '#009edb',
+        name:'Germany',
+        offset: 32 
+      },
+      {
+        id: 'Node 4: Rep. of Korea',
+        column: 4,
+        color: '#009edb',
+        name:'Rep. of Korea',
+        offset: 13
+      },
+      {
+        id: 'Node 4: Mexico',
+        column: 4,
+        color: '#009edb',
+        name:'Mexico',
+
+      },
+      {
+        id: 'Node 4: Belgium',
+        column: 4,
+        color: '#009edb',
+        name:'Belgium',
+
+      },
+      {
+      id: 'Node 4: Poland',
+        column: 4,
+        color: '#009edb',
+        name:'Poland',
+
+    },
+    {
+      id: 'Node 5: United Arab Emirates',
+        column: 5,
+        color: '#009edb',
+        name:'United Arab Emirates',
+        offset: 50
+    },
+    {
+      id: 'Node 5: Australia',
+        column: 5,
+        color: '#009edb',
+        name:'Australia',
+        offset: 50
+    },
+    {
+      id: 'Node 5: United Kingdom',
+        column: 5,
+        color: '#009edb',
+        name:'United Kingdom',
+        offset: 50
+    },
+    {
+      id: 'Node 5: United States',
+        column: 5,
+        color: '#009edb',
+        name:'United States',
+        offset: 50
+    },
+    {
+      id: 'Node 5: Norway',
+        column: 5,
+        color: '#009edb',
+        name:'Norway',
+        offset: 50
+    },
+    {
+      id: 'Node 5: Canada',
+        column: 5,
+        color: '#009edb',
+        name:'Canada',
+        offset: 50
+    },
+    {
+      id: 'Node 5: Germany',
+        column: 5,
+        color: '#009edb',
+        name:'Germany',
+        offset: 50
+    },
+    {
+      id: 'Node 5: Rep. of Korea',
+        column: 5,
+        color: '#009edb',
+        name:'Rep. of Korea',
+        offset: 50
+    }
+    ],
+
+
+    data: [
+      //Resource endowment
+
+   
+      //Node 0: Cobalt ore
+      ['Node 0: Democratic Republic of the Congo','Node 1: China', 140121713],
+      ['Node 0: Democratic Republic of the Congo','Node 1: Morocco', 26506016],
+      ['Node 0: Democratic Republic of the Congo','Node 1: Zambia', 586969],
+      ['Node 0: Austria', 'Node 1: Finland', 16398184],
+      ['Node 0: Austria', 'Node 1: Netherlands', 46],
+      ['Node 0: Netherlands', 'Node 1: Belgium', 2000650],
+      ['Node 0: Netherlands', 'Node 1: Italy', 1408316],
+      ['Node 0: Netherlands', 'Node 1: Oman', 71815],
+      //Node 1: Processing (Cobalt hydroxide)
+      ['Node 1: Democratic Republic of the Congo', 'Node 2: China', 5741004434],
+      ['Node 1: Democratic Republic of the Congo', 'Node 2: Namibia', 116209354],
+      ['Node 1: Democratic Republic of the Congo', 'Node 2: Rep. of Korea', 90388571],
+      ['Node 1: China', 'Node 2: Rep. of Korea', 200099027],
+      ['Node 1: China', 'Node 2: Japan', 34348128],
+      ['Node 1: China', 'Node 2: Spain', 30513842],
+      ['Node 1: Finland', 'Node 2: Japan', 289171000],
+      ['Node 1: Finland', 'Node 2: Belgium', 122808157],
+      ['Node 1: Finland', 'Node 2: United States', 68948001],
+      //Node 2: Manufacturing (Battery materials)
+      ['Node 2: China', 'Node 3: Rep. of Korea', 2990519760],
+      ['Node 2: China', 'Node 3: Japan', 983937756],
+      ['Node 2: China', 'Node 3: Poland', 637468064],
+      ['Node 2: Rep. of Korea', 'Node 3: Poland',1943402713],
+      ['Node 2: Rep. of Korea', 'Node 3: China', 351486805],
+      ['Node 2: Rep. of Korea', 'Node 3: Japan', 329256727],
+      ['Node 2: Japan', 'Node 3: Poland', 493318095],
+      ['Node 2: Japan', 'Node 3: China', 242193888],
+      ['Node 2: Japan', 'Node 3: Rep. of Korea', 97569348],
+      //Node 3: Manufacturing (Cell components)
+      ['Node 3: China', 'Node 4: United States',10550408722],
+      ['Node 3: China', 'Node 4: Germany', 8691576979],
+      ['Node 3: China', 'Node 4: Rep. of Korea', 5584819591],
+      ['Node 3: Poland', 'Node 4: Germany', 4228762086],
+      ['Node 3: Poland', 'Node 4: Mexico', 1474138843],
+      ['Node 3: Poland', 'Node 4: Belgium', 753438185],
+      ['Node 3: Rep. of Korea','Node 4: United States',3467622016],
+      ['Node 3: Rep. of Korea','Node 4: Germany',845010630],
+      ['Node 3: Rep. of Korea','Node 4: Poland',554210039],
+      // Node 4: EVs
+      ['Node 4: Germany','Node 5: United Kingdom',4406622054],
+      ['Node 4: Germany','Node 5: United States',3800210751],
+      ['Node 4: Germany','Node 5: Norway',3625245105],
+      ['Node 4: China', 'Node 5: United Kingdom',3933514188],
+      ['Node 4: China', 'Node 5: United Arab Emirates',1271952172],
+      ['Node 4: China', 'Node 5: Australia', 1267248539],
+      ['Node 4: China', 'Node 5: Norway', 1267095725],
+      ['Node 4: United States','Node 5: Canada',4144765644],
+      ['Node 4: United States','Node 5: Germany',4049393741],
+      ['Node 4: United States', 'Node 5: Rep. of Korea',1148409504]
+
+    ],
+    type: 'sankey',
+    name: 'Sankey demo series'
+  }]
+
+});
+</script>
+
+
+</body>
+</html> <!-- whatever you close it has to have the slash "/html" -->
