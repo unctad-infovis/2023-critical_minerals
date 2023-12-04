@@ -16,14 +16,13 @@ import HighchartsSankey from 'highcharts/modules/sankey';
 import highchartsExportData from 'highcharts/modules/export-data';
 
 // Load helpers.
-// import roundNr from '../helpers/RoundNr.js';
-// import formatNr from '../helpers/FormatNr.js';
+import roundNr from '../helpers/RoundNr.js';
+import formatNr from '../helpers/FormatNr.js';
 
 highchartsAccessibility(Highcharts);
 highchartsExporting(Highcharts);
 highchartsExportData(Highcharts);
 HighchartsSankey(Highcharts);
-// highchartsSeriesLabel(Highcharts);
 
 Highcharts.setOptions({
   lang: {
@@ -51,7 +50,7 @@ Highcharts.SVGRenderer.prototype.symbols.download = (x, y, w, h) => {
 };
 
 function SankeyChart({
-  column_labels_1, column_labels_2, data, idx, note, source, subtitle, title
+  column_labels_1, column_labels_2, data, data_type, idx, note, source, subtitle, title
 }) {
   const chartRef = useRef();
 
@@ -61,7 +60,7 @@ function SankeyChart({
     Highcharts.chart(`chartIdx${idx}`, {
       caption: {
         align: 'left',
-        margin: 30,
+        margin: 15,
         style: {
           color: 'rgba(0, 0, 0, 0.8)',
           fontSize: '14px'
@@ -69,33 +68,32 @@ function SankeyChart({
         text: `<em>Source:</em> ${source} based on <a href="https://comtradeplus.un.org/">Comtrade data</a> ${note ? (`<br /><em>Note:</em> <span>${note}</span>`) : ''}`,
         useHTML: true,
         verticalAlign: 'bottom',
-        x: 0,
-        y: 40
+        x: 0
       },
       chart: {
         events: {
           load() {
             const chart = this;
             chart.renderer.image('https://unctad.org/sites/default/files/2022-11/unctad_logo.svg', 15, 15, 83, 100).add();
+            const fromPoints = [10, chart.chartWidth / 5, chart.chartWidth / 5 + (1 * (chart.chartWidth / 5)) - 8, chart.chartWidth / 5 + (2 * (chart.chartWidth / 5)) - 17, chart.chartWidth / 5 + (3 * (chart.chartWidth / 5)) - 25, chart.chartWidth / 5 + (4 * (chart.chartWidth / 5)) - 35];
+            chart.customLines = [];
+            (fromPoints).forEach((customLine) => {
+              chart.customLines.push(chart.renderer.path(['M', customLine + chart.plotLeft, chart.plotHeight * 1.25, 'L', customLine + chart.plotLeft, chart.plotTop + 75]).attr({
+                'stroke-width': 0.5,
+                stroke: 'rgba(0, 158, 219, 1)'
+              }).add());
+            });
           },
           render() {
             const chart = this;
             chart.legend.allItems = chart.legend.allItems.slice(0, 2);
 
-            const fromPoints = [10, chart.chartWidth / 5, chart.chartWidth / 5 + (1 * (chart.chartWidth / 5)) - 8, chart.chartWidth / 5 + (2 * (chart.chartWidth / 5)) - 17, chart.chartWidth / 5 + (3 * (chart.chartWidth / 5)) - 25, chart.chartWidth / 5 + (4 * (chart.chartWidth / 5)) - 35];
-            chart.customLines = [];
-            (fromPoints).forEach((customLine) => {
-              chart.customLines.push(chart.renderer.path(['M', customLine + chart.plotLeft, 500 + chart.plotTop, 'L', customLine + chart.plotLeft, chart.plotTop + 10]).attr({
-                'stroke-width': 2,
-                stroke: 'rgba(0, 158, 219, 0.2)'
-              }).add());
-            });
             const positions_1 = [15, (chart.chartWidth / 5) + 5, (chart.chartWidth / 5) + (1.6 * (chart.chartWidth / 5)), (chart.chartWidth / 5) + (4 * (chart.chartWidth / 5)) - 80];
             if (chart.customLabels_1) {
               chart.customLabels_1.forEach((customLabel, i) => {
                 customLabel.attr({
                   x: positions_1[i],
-                  y: chart.chartHeight - 60
+                  y: chart.plotTop - 45
                 });
               });
             } else {
@@ -105,7 +103,7 @@ function SankeyChart({
                   chart.renderer.text(column_labels_1[i]).attr({
                     align: 'left',
                     x: positions_1[i],
-                    y: chart.chartHeight - 60
+                    y: chart.plotTop - 45
                   }).css({
                     fontFamily: 'Roboto',
                     fontSize: '14',
@@ -119,7 +117,7 @@ function SankeyChart({
               chart.customLabels_2.forEach((customLabel, i) => {
                 customLabel.attr({
                   x: positions_2[i],
-                  y: chart.chartHeight - 45
+                  y: chart.plotTop - 30
                 });
               });
             } else {
@@ -129,7 +127,7 @@ function SankeyChart({
                   chart.renderer.text(column_labels_2[i]).attr({
                     align: 'center',
                     x: positions_2[i],
-                    y: chart.chartHeight - 45
+                    y: chart.plotTop - 30
                   }).css({
                     fontFamily: 'Roboto',
                     lineHeight: 12,
@@ -143,9 +141,11 @@ function SankeyChart({
             const chart = this;
             const fromPoints = [10, chart.chartWidth / 5, chart.chartWidth / 5 + (1 * (chart.chartWidth / 5)) - 8, chart.chartWidth / 5 + (2 * (chart.chartWidth / 5)) - 17, chart.chartWidth / 5 + (3 * (chart.chartWidth / 5)) - 25, chart.chartWidth / 5 + (4 * (chart.chartWidth / 5)) - 35];
             (fromPoints).forEach((customLine, i) => {
-              chart.customLines[i].attr({
-                d: `M ${customLine + chart.plotLeft} ${chart.plotY + chart.plotTop} L ${customLine + chart.plotLeft} ${chart.plotTop + 10}`
-              });
+              if (chart.customLines) {
+                chart.customLines[i].attr({
+                  d: `M ${customLine + chart.plotLeft} ${chart.plotY + chart.plotTop} L ${customLine + chart.plotLeft} ${chart.plotTop + 10}`
+                });
+              }
             });
           }
         },
@@ -271,11 +271,20 @@ function SankeyChart({
         rules: [{
           chartOptions: {
             title: {
-              margin: 30
+              margin: 80
             }
           },
           condition: {
             maxWidth: 800
+          }
+        }, {
+          chartOptions: {
+            title: {
+              margin: 120
+            }
+          },
+          condition: {
+            maxWidth: 1000
           }
         }, {
           chartOptions: {
@@ -307,7 +316,7 @@ function SankeyChart({
       },
       title: {
         align: 'left',
-        margin: 50,
+        margin: 125,
         style: {
           color: '#000',
           fontSize: '30px',
@@ -324,8 +333,15 @@ function SankeyChart({
         borderWidth: 1,
         crosshairs: true,
         headerFormat: null,
-        nodeFormat: '{point.name}: {point.sum:.2f}%',
-        pointFormat: '{point.fromNode.name} \u2192 {point.toNode.name}: {point.weight:.2f}%',
+        formatter() {
+          const chart = this;
+          if (chart.point.fromNode && chart.point.toNode) {
+            const value = data_type === 'percentage' ? `${roundNr(chart.point.weight, 2)}%` : `US$ ${formatNr(chart.point.weight, ' ')}`;
+            return `<div class="tooltip_container"><h3 class="tooltip_header">${chart.point.fromNode.name} \u2192 ${chart.point.toNode.name}</h3><div><span class="tooltip_label">Value:</span> <span class="tooltip_value">${value}</span></div></div>`;
+          }
+          const value = data_type === 'percentage' ? `${roundNr(chart.point.sum, 2)}%` : `US$ ${formatNr(chart.point.sum, ' ')}`;
+          return `<div class="tooltip_container"><h3 class="tooltip_header">${chart.key}</h3><div><span class="tooltip_label">Value:</span> <span class="tooltip_value">${value}</span></div></div>`;
+        },
         shadow: false,
         shared: false,
         useHTML: true
@@ -338,7 +354,7 @@ function SankeyChart({
       }
     });
     chartRef.current.querySelector(`#chartIdx${idx}`).style.opacity = 1;
-  }, [column_labels_1, column_labels_2, data, idx, note, source, subtitle, title]);
+  }, [column_labels_1, column_labels_2, data, data_type, idx, note, source, subtitle, title]);
 
   useEffect(() => {
     if (isVisible === true) {
@@ -362,6 +378,7 @@ SankeyChart.propTypes = {
   column_labels_1: PropTypes.instanceOf(Array).isRequired,
   column_labels_2: PropTypes.instanceOf(Array).isRequired,
   data: PropTypes.instanceOf(Array).isRequired,
+  data_type: PropTypes.string,
   idx: PropTypes.string.isRequired,
   note: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   source: PropTypes.string.isRequired,
@@ -370,6 +387,7 @@ SankeyChart.propTypes = {
 };
 
 SankeyChart.defaultProps = {
+  data_type: 'absolute',
   note: false,
   subtitle: false
 };

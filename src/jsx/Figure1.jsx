@@ -271,6 +271,7 @@ function Figure1() {
         column_labels_1={['Extraction', 'Processing', 'Manufacturing of parts', 'End users']}
         column_labels_2={['Cobalt<br />ore', 'Cobalt<br />hydroxide', 'Battery<br />materials', 'Cell<br />components', 'Electric<br />vehicles']}
         data={dataFigure}
+        data_type="percentage"
         idx="1"
         note={false}
         source="UNCTAD calculations"
