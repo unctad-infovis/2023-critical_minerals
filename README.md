@@ -2,6 +2,10 @@
 
 **Live demo** https://unctad-infovis.github.io/2023-critical_minerals/
 
+## Used in
+
+* [Clean energy minerals: Developing countries must add value to capitalize on demand](https://unctad.org/news/clean-energy-minerals-developing-countries-must-add-value-capitalize-demand)
+
 ## Rights of usage
 
 Contact Teemo Tebest.

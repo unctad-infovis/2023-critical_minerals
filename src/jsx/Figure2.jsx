@@ -271,8 +271,8 @@ function Figure1() {
         idx="2"
         note={false}
         source="UNCTAD calculations"
-        subtitle="Cobalt trade flows along the EV value chain, US$, 2022"
-        title="Adding value to cobalt in the electric vehicle value chain"
+        subtitle="Cobalt trade flows along the EV battery value chain, US$, 2022"
+        title="Adding value to cobalt as it's turned into an electric vehicle battery"
         ylabel=""
       />
       )}

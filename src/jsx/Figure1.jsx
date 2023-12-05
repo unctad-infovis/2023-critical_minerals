@@ -275,8 +275,8 @@ function Figure1() {
         idx="1"
         note={false}
         source="UNCTAD calculations"
-        subtitle="Cobalt trade flows along the EV value chain, percentage of total exports, 2022"
-        title="Cobalt market consentration in the electric vehicle value chain"
+        subtitle="Cobalt trade flows along the EV battery value chain, percentage of total exports, 2022"
+        title="Cobalt market concentration in electric vehicle battery value chains"
         ylabel=""
       />
       )}

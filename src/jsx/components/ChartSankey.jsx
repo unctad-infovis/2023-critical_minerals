@@ -54,7 +54,7 @@ function SankeyChart({
 }) {
   const chartRef = useRef();
 
-  const chartHeight = 700;
+  const chartHeight = 800;
   const isVisible = useIsVisible(chartRef, { once: true });
   const createChart = useCallback(() => {
     Highcharts.chart(`chartIdx${idx}`, {
@@ -74,7 +74,7 @@ function SankeyChart({
         events: {
           load() {
             const chart = this;
-            chart.renderer.image('https://unctad.org/sites/default/files/2022-11/unctad_logo.svg', 15, 15, 83, 100).add();
+            chart.renderer.image('https://storage.unctad.org/2023-critical_minerals/assets/img/unctad_logo.png', 15, 15, 83, 100).add();
             const fromPoints = [10, chart.chartWidth / 5, chart.chartWidth / 5 + (1 * (chart.chartWidth / 5)) - 8, chart.chartWidth / 5 + (2 * (chart.chartWidth / 5)) - 17, chart.chartWidth / 5 + (3 * (chart.chartWidth / 5)) - 25, chart.chartWidth / 5 + (4 * (chart.chartWidth / 5)) - 35];
             chart.customLines = [];
             (fromPoints).forEach((customLine) => {
@@ -88,7 +88,7 @@ function SankeyChart({
             const chart = this;
             chart.legend.allItems = chart.legend.allItems.slice(0, 2);
 
-            const positions_1 = [15, (chart.chartWidth / 5) + 5, (chart.chartWidth / 5) + (1.6 * (chart.chartWidth / 5)), (chart.chartWidth / 5) + (4 * (chart.chartWidth / 5)) - 80];
+            const positions_1 = [15, (chart.chartWidth / 5) + 5, (chart.chartWidth / 5) + (1.3 * (chart.chartWidth / 5)), (chart.chartWidth / 5) + (4 * (chart.chartWidth / 5)) - 60];
             if (chart.customLabels_1) {
               chart.customLabels_1.forEach((customLabel, i) => {
                 customLabel.attr({
@@ -106,13 +106,13 @@ function SankeyChart({
                     y: chart.plotTop - 45
                   }).css({
                     fontFamily: 'Roboto',
-                    fontSize: '14',
+                    fontSize: '12',
                     fontWeight: 600
                   }).add()
                 );
               });
             }
-            const positions_2 = [45, (chart.chartWidth / 5) + 35, (chart.chartWidth / 5) + (1.5 * (chart.chartWidth / 5)), (chart.chartWidth / 5) + (2.5 * (chart.chartWidth / 5)), (chart.chartWidth / 5) + (4 * (chart.chartWidth / 5)) - 50];
+            const positions_2 = [45, (chart.chartWidth / 5) + 35, (chart.chartWidth / 5) + (1.5 * (chart.chartWidth / 5)), (chart.chartWidth / 5) + (2.5 * (chart.chartWidth / 5)), (chart.chartWidth / 5) + (4 * (chart.chartWidth / 5)) - 30];
             if (chart.customLabels_2) {
               chart.customLabels_2.forEach((customLabel, i) => {
                 customLabel.attr({
@@ -130,8 +130,8 @@ function SankeyChart({
                     y: chart.plotTop - 30
                   }).css({
                     fontFamily: 'Roboto',
-                    lineHeight: 12,
-                    fontSize: 12
+                    lineHeight: 11,
+                    fontSize: 11
                   }).add()
                 );
               });
@@ -270,21 +270,40 @@ function SankeyChart({
       responsive: {
         rules: [{
           chartOptions: {
+            chart: {
+              height: 1000
+            },
+            plotOptions: {
+              sankey: {
+                dataLabels: {
+                  allowOverlap: false
+                }
+              }
+            },
             title: {
               margin: 80
             }
           },
           condition: {
-            maxWidth: 800
+            maxWidth: 700
           }
         }, {
           chartOptions: {
             title: {
-              margin: 120
+              margin: 70
             }
           },
           condition: {
             maxWidth: 1000
+          }
+        }, {
+          chartOptions: {
+            title: {
+              margin: 90
+            }
+          },
+          condition: {
+            maxWidth: 1200
           }
         }, {
           chartOptions: {
@@ -323,7 +342,7 @@ function SankeyChart({
           fontWeight: 700
         },
         text: title,
-        widthAdjust: -160,
+        widthAdjust: -144,
         x: 100,
       },
       tooltip: {
@@ -339,18 +358,19 @@ function SankeyChart({
             const value = data_type === 'percentage' ? `${roundNr(chart.point.weight, 2)}%` : `US$ ${formatNr(chart.point.weight, ' ')}`;
             return `<div class="tooltip_container"><h3 class="tooltip_header">${chart.point.fromNode.name} \u2192 ${chart.point.toNode.name}</h3><div><span class="tooltip_label">Value:</span> <span class="tooltip_value">${value}</span></div></div>`;
           }
-          const value = data_type === 'percentage' ? `${roundNr(chart.point.sum, 2)}%` : `US$ ${formatNr(chart.point.sum, ' ')}`;
-          return `<div class="tooltip_container"><h3 class="tooltip_header">${chart.key}</h3><div><span class="tooltip_label">Value:</span> <span class="tooltip_value">${value}</span></div></div>`;
+          return undefined;
+          // const value = data_type === 'percentage' ? `${roundNr(chart.point.sum, 2)}%` : `US$ ${formatNr(chart.point.sum, ' ')}`;
+          // return `<div class="tooltip_container"><h3 class="tooltip_header">${chart.key}</h3><div><span class="tooltip_label">Value:</span> <span class="tooltip_value">${value}</span></div></div>`;
         },
         shadow: false,
         shared: false,
         useHTML: true
       },
       xAxis: {
-
+        enabled: false
       },
       yAxis: {
-
+        enabled: false
       }
     });
     chartRef.current.querySelector(`#chartIdx${idx}`).style.opacity = 1;
