@@ -350,15 +350,17 @@ function SankeyChart({
         borderColor: '#ccc',
         borderRadius: 0,
         borderWidth: 1,
-        crosshairs: true,
+        crosshairs: false,
         headerFormat: null,
+        hideDelay: 0,
+        delayForDisplay: 0,
         formatter() {
           const chart = this;
           if (chart.point.fromNode && chart.point.toNode) {
             const value = data_type === 'percentage' ? `${roundNr(chart.point.weight, 2)}%` : `US$ ${formatNr(chart.point.weight, ' ')}`;
             return `<div class="tooltip_container"><h3 class="tooltip_header">${chart.point.fromNode.name} \u2192 ${chart.point.toNode.name}</h3><div><span class="tooltip_label">Value:</span> <span class="tooltip_value">${value}</span></div></div>`;
           }
-          return undefined;
+          return false;
           // const value = data_type === 'percentage' ? `${roundNr(chart.point.sum, 2)}%` : `US$ ${formatNr(chart.point.sum, ' ')}`;
           // return `<div class="tooltip_container"><h3 class="tooltip_header">${chart.key}</h3><div><span class="tooltip_label">Value:</span> <span class="tooltip_value">${value}</span></div></div>`;
         },
