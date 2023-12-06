@@ -78,9 +78,9 @@ function SankeyChart({
             const fromPoints = [10, chart.chartWidth / 5, chart.chartWidth / 5 + (1 * (chart.chartWidth / 5)) - 8, chart.chartWidth / 5 + (2 * (chart.chartWidth / 5)) - 17, chart.chartWidth / 5 + (3 * (chart.chartWidth / 5)) - 25, chart.chartWidth / 5 + (4 * (chart.chartWidth / 5)) - 35];
             chart.customLines = [];
             (fromPoints).forEach((customLine) => {
-              chart.customLines.push(chart.renderer.path(['M', customLine + chart.plotLeft, chart.plotHeight * 1.25, 'L', customLine + chart.plotLeft, chart.plotTop + 75]).attr({
-                'stroke-width': 0.5,
-                stroke: 'rgba(0, 158, 219, 1)'
+              chart.customLines.push(chart.renderer.path(['M', customLine + chart.plotLeft, chart.chartHeight - 65, 'L', customLine + chart.plotLeft, chart.plotTop]).attr({
+                'stroke-width': 1,
+                stroke: 'rgba(174, 162, 154, 0.5)'
               }).add());
             });
           },
