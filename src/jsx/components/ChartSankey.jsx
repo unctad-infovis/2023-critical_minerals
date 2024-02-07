@@ -224,7 +224,7 @@ function SankeyChart({
               fontWeight: 400,
               textOutline: '1px solid #fff'
             },
-            x: 20,
+            x: 20
           },
           events: {
             legendItemClick() {
