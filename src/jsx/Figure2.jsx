@@ -264,7 +264,7 @@ function Figure1() {
     <div className="app">
       {dataFigure && (
       <ChartSankey
-        column_labels_1={['Extraction', 'Processing', 'Manufacturing of parts', 'End users']}
+        column_labels_1={['Ore exports', 'Processing', 'Manufacturing of parts', 'End users']}
         column_labels_2={['Cobalt<br />ore', 'Cobalt<br />hydroxide', 'Battery<br />materials', 'Cell<br />components', 'Electric<br />vehicles']}
         data={dataFigure}
         data_type="absolute"
