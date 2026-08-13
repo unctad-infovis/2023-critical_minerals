@@ -50,7 +50,7 @@ Highcharts.SVGRenderer.prototype.symbols.download = (x, y, w, h) => {
 };
 
 function SankeyChart({
-  column_labels_1, column_labels_2, data, data_type, idx, note, source, subtitle, title
+  column_labels_1, column_labels_2, data, data_type = 'absolute', idx, note = false, source, subtitle = false, title
 }) {
   const chartRef = useRef();
 
@@ -406,12 +406,6 @@ SankeyChart.propTypes = {
   source: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   title: PropTypes.string.isRequired
-};
-
-SankeyChart.defaultProps = {
-  data_type: 'absolute',
-  note: false,
-  subtitle: false
 };
 
 export default memo(SankeyChart);
